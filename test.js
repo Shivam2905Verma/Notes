@@ -1,7 +1,8 @@
-async function test() {
-    return 10;
+function person(){
+    this.name = "shivam"
+    let name = "shivam"
 }
 
-const result = test();
+const p = new person();
 
-console.log("A")
+console.log(p)
