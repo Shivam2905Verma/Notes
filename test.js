@@ -1,8 +1,11 @@
-function person(){
-    this.name = "shivam"
-    let name = "shivam"
-}
+const buffer = new ArrayBuffer(8);
 
-const p = new person();
+console.log(buffer.byteLength);
 
-console.log(p)
+const bytes = new Uint8Array(buffer);
+
+bytes[0] = "shivam";
+bytes[1] = 200;
+
+console.log(bytes);
+console.log(buffer);
