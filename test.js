@@ -1,25 +1,20 @@
-const stream = new ReadableStream({
-  start(controller) {
-    controller.enqueue("Hello");
-    controller.enqueue("Boss");
-    controller.enqueue("How");
-    controller.enqueue("are");
-    controller.enqueue("you?");
+const audioContext = new AudioContext();
 
-    controller.close();
-  },
+const stream = await navigator.mediaDevices.getUserMedia({
+  audio: true,
 });
 
-const reader = stream.getReader();
+const source = audioContext.createMediaElementSource(stream);
+const gainNode = audioContext.createGain();
+const analyser = audioContext.createAnalyser();
 
-while (true) {
-  const { value, done } = await reader.read();
+source.connect(audioContext.destination);
 
-  if (done) {
-    break;
-  }
+source.connect(gainNode);
+gainNode.gain.value = 0.5;
+gainNode.connect(audioContext.destination);
 
-  console.log(value);
-}
+source.connect(analyser);
+analyser.connect(audioContext.destination);
 
-structuredClone;
+gainNode.gain.value = 0.5;
